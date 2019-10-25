@@ -1,0 +1,24 @@
+{
+  "name": "my-dockerfile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "git add . --all && git commit -m update && git push origin master",
+    "save": "npm run commit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caigk/my-docker.git"
+  },
+  "keywords": [
+    "docker"
+  ],
+  "author": "caigk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caigk/my-docker/issues"
+  },
+  "homepage": "https://github.com/caigk/my-docker#readme"
+}

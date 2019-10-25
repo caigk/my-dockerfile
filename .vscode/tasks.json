@@ -11,7 +11,9 @@
                 "reveal": "always",
                 "focus": true
             },
-            "problemMatcher": []
+            "problemMatcher": [
+                
+            ]
         },
         {
             "type": "npm",

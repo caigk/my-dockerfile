@@ -12,10 +12,10 @@
 
 - etc/my.cnf 中 加入
 
-(```)
-[mysqld] 
-lower_case_table_names=1 
-(```)
+```
+[mysqld]
+lower_case_table_names=1
+```
 
 ## docker常用命令
 
@@ -33,3 +33,7 @@ lower_case_table_names=1
 `/opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"`
 
 `docker exec gentou /opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"`
+
+SELECT CONCAT('drop table ',table_name,';') FROM information_schema.`TABLES` WHERE table_schema='test';
+
+rm -f /opt/lampp/logs/*

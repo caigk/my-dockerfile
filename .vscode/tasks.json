@@ -6,9 +6,11 @@
         {
             "type": "npm",
             "script": "save",
-            "problemMatcher": [
-                "$eslint-compact"
-            ]
+            "presentation": {
+                "reveal": "always",
+                "focus": true
+            },
+            "problemMatcher": []
         }
     ]
 }

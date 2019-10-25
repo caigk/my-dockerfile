@@ -10,7 +10,7 @@
 
 - etc/extra/httpd-xampp.conf 中修改phpmyadmin 权限
 
-- etc/my.cnf 中 加入
+- etc/my.cnf 中 加入 略表名大表写
 
 ```
 [mysqld]
@@ -34,6 +34,8 @@ lower_case_table_names=1
 
 `docker exec gentou /opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"`
 
+```
 SELECT CONCAT('drop table ',table_name,';') FROM information_schema.`TABLES` WHERE table_schema='test';
 
 rm -f /opt/lampp/logs/*
+```

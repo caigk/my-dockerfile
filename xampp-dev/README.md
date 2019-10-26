@@ -50,6 +50,16 @@ rm -f /opt/lampp/logs/*
 docker run -d -v ~/Documents/Docker:/var/lib/registry -p 5000:5000 --restart=always --name registry registry
 ```
 
+## 阿里云仓库
+
+```
+docker login --username=#######@aliyun.com registry.cn-hangzhou.aliyuncs.com
+docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/jinguisoft/cgk-xampp-dev:[镜像版本号]
+docker push registry.cn-hangzhou.aliyuncs.com/jinguisoft/cgk-xampp-dev:[镜像版本号]
+
+docker pull registry.cn-hangzhou.aliyuncs.com/jinguisoft/cgk-xampp-dev:[镜像版本号]
+```
+
 ## 安装portainer/portainer
 
 [文档](https://portainer.readthedocs.io/en/stable/deployment.html#quick-start)

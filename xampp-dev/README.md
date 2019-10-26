@@ -27,7 +27,12 @@ lower_case_table_names=1
 
 重启服务：`docker exec gentou /opt/lampp/xampp restart`
 
+保存镜像：`docker save --output cgk-xampp-dev-latest.tar cgk-xampp-dev:latest`
+
+保存镜像：`docker save cgk-xampp-dev:latest| gzip > cgk-xampp-dev-latest.tar.gz`
+
 ---
+
 ## 导入数据库
 
 `/opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"`
@@ -38,4 +43,19 @@ lower_case_table_names=1
 SELECT CONCAT('drop table ',table_name,';') FROM information_schema.`TABLES` WHERE table_schema='test';
 
 rm -f /opt/lampp/logs/*
+```
+
+## 安装私人仓库
+```
+docker run -d -v ~/Documents/Docker:/var/lib/registry -p 5000:5000 --restart=always --name registry registry
+```
+
+## 安装portainer/portainer
+
+[文档](https://portainer.readthedocs.io/en/stable/deployment.html#quick-start)
+
+```
+mkdir -p ~/dev/docker_file/portainer/data
+docker run -d -p 9000:9000 --restart=always --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v ~/dev/docker_file/portainer/data:/data docker.io/portainer/portainer
+
 ```

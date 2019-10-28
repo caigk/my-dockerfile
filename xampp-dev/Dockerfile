@@ -12,5 +12,9 @@ COPY conf/ /opt/lampp/
 
 VOLUME [ "/var/local/www" ]
 
+# /opt/lampp/logs
+# /opt/lampp/var
+
+
 EXPOSE 80 8000
 

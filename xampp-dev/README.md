@@ -4,22 +4,57 @@
 
 ## 配置修改
 
-- etc/httpd.conf 启动虚拟机 httpd-vhosts.conf
+### etc/httpd.conf 启动虚拟机 httpd-vhosts.conf
 
-- etc/extra/httpd-vhosts.conf 中配置服务
-
-- etc/extra/httpd-xampp.conf 中修改phpmyadmin 权限
-
-- etc/my.cnf 中 加入 略表名大表写
+```ini
+# Virtual hosts
+Include etc/extra/httpd-vhosts.conf
 
 ```
+
+### etc/extra/httpd-vhosts.conf 中配置服务
+
+```ini
+<Directory "/var/local/www">
+    Options Indexes FollowSymLinks ExecCGI Includes
+    AllowOverride All
+    Require all granted
+</Directory>
+
+Listen 8000
+<VirtualHost *:8000>
+    ServerAdmin webmaster@local1
+    DocumentRoot "/var/local/www"
+    ServerName localhost
+    ServerAlias local1
+    ErrorLog "logs/local1-error_log"
+    CustomLog "logs/local1-access_log" common
+</VirtualHost>
+```
+
+### etc/extra/httpd-xampp.conf 中修改phpmyadmin 权限
+
+```ini
+<Directory "/opt/lampp/phpmyadmin">
+    AllowOverride AuthConfig Limit
+    # require local
+    Require all granted
+    ErrorDocument 403 /error/XAMPP_FORBIDDEN.html.var
+</Directory>
+```
+
+### etc/my.cnf 中 加入 略表名大表写
+
+```ini
 [mysqld]
 lower_case_table_names=1
 ```
 
 ## docker常用命令
 
-删除容器：`docker rm gentou`
+```sh
+#删除容器：
+docker rm gentou
 
 创建容器：`docker run -p 8020:8000 -v $(pwd):/var/local/www  --name gentou cgk-xampp-dev:latest`
 
@@ -30,23 +65,26 @@ lower_case_table_names=1
 保存镜像：`docker save --output cgk-xampp-dev-latest.tar cgk-xampp-dev:latest`
 
 保存镜像：`docker save cgk-xampp-dev:latest| gzip > cgk-xampp-dev-latest.tar.gz`
-
----
+```
 
 ## 导入数据库
 
-`/opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"`
-
-`docker exec gentou /opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"`
-
+```sh
+/opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"
 ```
-SELECT CONCAT('drop table ',table_name,';') FROM information_schema.`TABLES` WHERE table_schema='test';
 
-rm -f /opt/lampp/logs/*
+```sh
+docker exec gentou /opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"
+```
+
+```sql
+--生成清理数据语句
+SELECT CONCAT('drop table ',table_name,';') FROM information_schema.`TABLES` WHERE table_schema='test';
 ```
 
 ## 安装私人仓库
-```
+
+```sh
 docker run -d -v ~/Documents/Docker:/var/lib/registry -p 5000:5000 --restart=always --name registry registry
 ```
 

@@ -53,18 +53,23 @@ lower_case_table_names=1
 ## docker常用命令
 
 ```sh
-#删除容器：
+# 删除容器
 docker rm gentou
 
-创建容器：`docker run -p 8020:8000 -v $(pwd):/var/local/www  --name gentou cgk-xampp-dev:latest`
+# 创建容器
+docker run -p 8020:8000 -v $(pwd):/var/local/www  --name gentou cgk-xampp-dev:latest
 
-终端操作：`docker exec -i -t gentou -i -t`
+# 终端操作
+docker exec -i -t gentou -i -t
 
-重启服务：`docker exec gentou /opt/lampp/xampp restart`
+# 重启服务
+docker exec gentou /opt/lampp/xampp restart
 
-保存镜像：`docker save --output cgk-xampp-dev-latest.tar cgk-xampp-dev:latest`
+# 保存镜像方法一
+docker save --output cgk-xampp-dev-latest.tar cgk-xampp-dev:latest
 
-保存镜像：`docker save cgk-xampp-dev:latest| gzip > cgk-xampp-dev-latest.tar.gz`
+# 保存镜像方法二
+docker save cgk-xampp-dev:latest| gzip > cgk-xampp-dev-latest.tar.gz
 ```
 
 ## 导入数据库
@@ -90,7 +95,7 @@ docker run -d -v ~/Documents/Docker:/var/lib/registry -p 5000:5000 --restart=alw
 
 ## 阿里云仓库
 
-```
+```sh
 docker login --username=#######@aliyun.com registry.cn-hangzhou.aliyuncs.com
 docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/jinguisoft/cgk-xampp-dev:[镜像版本号]
 docker push registry.cn-hangzhou.aliyuncs.com/jinguisoft/cgk-xampp-dev:[镜像版本号]
@@ -102,8 +107,7 @@ docker pull registry.cn-hangzhou.aliyuncs.com/jinguisoft/cgk-xampp-dev:[镜像�
 
 [文档](https://portainer.readthedocs.io/en/stable/deployment.html#quick-start)
 
-```
+```sh
 mkdir -p ~/dev/docker_file/portainer/data
 docker run -d -p 9000:9000 --restart=always --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v ~/dev/docker_file/portainer/data:/data docker.io/portainer/portainer
-
 ```

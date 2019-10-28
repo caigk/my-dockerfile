@@ -59,12 +59,12 @@ docker rm gentou
 # 创建容器
 docker run -p 8020:8000 -v $(pwd):/var/local/www  --name gentou cgk-xampp-dev:latest
 
-docker run -i -d  \
+docker run -idt  \
     -p 8020:8000 -p 8021:80 \
     -v $(pwd):/var/local/www \
     -v $(pwd)/db/logs:/opt/lampp/logs \
     --name gentou \
-    cgk-xampp-dev:latest /bin/bash \
+    cgk-xampp-dev:latest \
 && docker exec gentou /opt/lampp/xampp start
 
 # 停止并删除
@@ -72,6 +72,8 @@ docker stop gentou && docker rm gentou
 
 # 终端操作
 docker exec -i -t gentou /bin/bash
+
+docker attach gentou #退出时 先后按Ctrl-p和Ctrl-q键
 
 # 重启服务
 docker exec gentou /opt/lampp/xampp restart

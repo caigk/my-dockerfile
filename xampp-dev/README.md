@@ -59,8 +59,19 @@ docker rm gentou
 # 创建容器
 docker run -p 8020:8000 -v $(pwd):/var/local/www  --name gentou cgk-xampp-dev:latest
 
+docker run -i -d  \
+    -p 8020:8000 -p 8021:80 \
+    -v $(pwd):/var/local/www \
+    -v $(pwd)/db/logs:/opt/lampp/logs \
+    --name gentou \
+    cgk-xampp-dev:latest /bin/bash \
+&& docker exec gentou /opt/lampp/xampp start
+
+# 停止并删除
+docker stop gentou && docker rm gentou
+
 # 终端操作
-docker exec -i -t gentou -i -t
+docker exec -i -t gentou /bin/bash
 
 # 重启服务
 docker exec gentou /opt/lampp/xampp restart
@@ -75,11 +86,12 @@ docker save cgk-xampp-dev:latest| gzip > cgk-xampp-dev-latest.tar.gz
 ## 导入数据库
 
 ```sh
-/opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"
-```
+#方法一：直接导入
+docker exec -it  gentou  bash -c "/opt/lampp/bin/mysql  --database=test  < /var/local/www/db/gentou_20190411.sql"
 
-```sh
-docker exec gentou /opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"
+#方法二：进入容器导入
+/opt/lampp/bin/mysql  --database=test  < "/var/local/www/db/gentou_20190411.sql"
+
 ```
 
 ```sql

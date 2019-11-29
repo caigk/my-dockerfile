@@ -88,7 +88,8 @@ extension=apc.so
 sudo yum install glibc.i686
 mkdir /usr/java
 cd /usr/java
-wget https://javadl.oracle.com/webapps/download/AutoDL?BundleId=240715_5b13a193868b4bf28bcb45c792fce896 -O jre-8u231-linux-i586.rpm
+;wget https://javadl.oracle.com/webapps/download/AutoDL?BundleId=240715_5b13a193868b4bf28bcb45c792fce896 -O jre-8u231-linux-i586.rpm
+cp /var/local/www/jre-8u231-linux-i586.rpm .
 rpm -ivh jre-8u231-linux-i586.rpm
 java -version
 

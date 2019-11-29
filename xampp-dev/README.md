@@ -50,6 +50,51 @@ Listen 8000
 lower_case_table_names=1
 ```
 
+### 安装XDebug
+
+```sh
+yum -y install gcc automake autoconf libtool make
+
+/opt/lampp/bin/pecl install xdebug
+```
+
+php.ini中新增
+
+```conf
+zend_extension=/opt/lampp/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so
+```
+
+### 安装ACPU
+
+```sh
+#注意环境
+yum -y install gcc automake autoconf libtool make
+#安装
+/opt/lampp/bin/pecl install apcu
+/opt/lampp/bin/pecl install apcu_bc-beta
+```
+
+php.ini中新增
+
+```conf
+extension=apcu.so
+extension=apc.so
+```
+
+## 安装java
+
+```sh
+;一定要注意当前目录 /usr/java
+sudo yum install glibc.i686
+mkdir /usr/java
+cd /usr/java
+wget https://javadl.oracle.com/webapps/download/AutoDL?BundleId=240715_5b13a193868b4bf28bcb45c792fce896 -O jre-8u231-linux-i586.rpm
+rpm -ivh jre-8u231-linux-i586.rpm
+java -version
+
+
+```
+
 ## docker常用命令
 
 ```sh

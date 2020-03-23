@@ -62,6 +62,21 @@ php.ini中新增
 
 ```conf
 zend_extension=/opt/lampp/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so
+
+[XDebug]
+xdebug.remote_enable=1
+;host.docker.internal为docker宿主
+xdebug.remote_host=host.docker.internal
+xdebug.remode_mode=req
+xdebug.remote_handler=dbgp
+xdebug.remote_port=9000
+;
+;xdebug.idekey=PHPSTORM
+;如果h启用，将禁用remote_host,使用$_SERVER['HTTP_X_FORWARDED_FOR'] and $_SERVER['REMOTE_ADDR']
+;xdebug.remote_connect_back=1
+xdebug.remote_autostart=1
+xdebug.remote_log=/var/local/www/xdebug.log
+
 ```
 
 ### 安装ACPU
@@ -93,6 +108,16 @@ cp /var/local/www/jre-8u231-linux-i586.rpm .
 rpm -ivh jre-8u231-linux-i586.rpm
 java -version
 
+
+```
+
+## 安装mcrypt(php7 无需安装)
+
+```bash
+yum install -y epel-release
+yum install -y libmcrypt-devel
+
+/opt/lampp/bin/pecl install mcrypt
 
 ```
 
@@ -171,3 +196,11 @@ docker pull registry.cn-hangzhou.aliyuncs.com/jinguisoft/cgk-xampp-dev:[镜像�
 mkdir -p ~/dev/docker_file/portainer/data
 docker run -d -p 9000:9000 --restart=always --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v ~/dev/docker_file/portainer/data:/data docker.io/portainer/portainer
 ```
+
+## 上线前的准备工作
+
+数据库清理（保留业务数据，清理日志） 蔡刚坤完成
+生产系统环境切换                  蔡刚坤完成
+钉钉微应用权限开放给所有员工
+oa生产系统中建立对应虚拟账号 统一浏览虑拟账号指定为hhadmin
+

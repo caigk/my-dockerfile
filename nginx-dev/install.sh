@@ -49,6 +49,13 @@ yum list
 yum install -y php72w php72w-opcache php72w-xml php72w-mcrypt php72w-gd php72w-devel php72w-mysql php72w-intl php72w-mbstring
 yum install php72w-fpm
 
+#安装phpredis
+pecl install redis
+
+# 加入扩展
+# vi /etc/php.d/redis.ini
+# extension=redis.so
+
 /usr/sbin/php-fpm -D
 
 ps -ef | grep php-fpm

@@ -34,6 +34,27 @@ tar -zxvf nginx-1.17.9.tar.gz
 cd nginx-1.17.9
 ./configure --prefix=/usr/local/nginx
 make & make install
+
+#安装 mariadb
+# https://mariadb.com/kb/en/mariadb-package-repository-setup-and-usage/
+
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
+yum install MariaDB-server MariaDB-client
+
+#启动
+https://mariadb.com/kb/en/starting-and-stopping-mariadb-automatically/
+mysqld --user=root &
+mysqld_safe --defaults-file=/etc/my.cnf --user=root –skip-grant-tables &
+
+mysqld_safe –user=mysql  –skip-networking &
+
+#关闭
+mysqladmin -u root -p shutdown
+
+#状态
+mysqladmin -u root -p status
+ps aux|grep mysql
+
 ```
 
 ## docker常用命令

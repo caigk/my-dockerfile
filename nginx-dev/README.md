@@ -35,6 +35,12 @@ cd nginx-1.17.9
 ./configure --prefix=/usr/local/nginx
 make & make install
 
+#可以直接安装 openresty 的nginx版 ：https://openresty.org/en/
+yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo
+yum install openresty
+yum install openresty-resty
+# 安装路径：/usr/local/openresty
+
 #安装 mariadb
 # https://mariadb.com/kb/en/mariadb-package-repository-setup-and-usage/
 

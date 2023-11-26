@@ -53,16 +53,14 @@ make install
 
 /usr/local/nginx/sbin/nginx
 ps -ef | grep nginx
-
 ```
-
-
 
 ## 安装openresty
 
 openresty 是另一个发行版
-[OpenResty](https://openresty.org/en/)
-[lua-nginx-module](https://github.com/openresty/lua-nginx-module)
+
+* [OpenResty](https://openresty.org/en/)
+* [lua-nginx-module](https://github.com/openresty/lua-nginx-module)
 
 ```bash
 yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo
